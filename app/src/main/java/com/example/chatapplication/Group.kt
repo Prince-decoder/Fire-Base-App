@@ -86,9 +86,3 @@ fun Group()
         Column(modifier = Modifier.fillMaxSize().padding(it),
             ) {  } }
 }
-@Preview(showSystemUi = true)
-@Composable
-fun demo()
-{
-    Group()
-}

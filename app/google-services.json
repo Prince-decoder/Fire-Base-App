@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "355545016295",
+    "project_id": "practice-project-18be0",
+    "storage_bucket": "practice-project-18be0.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:355545016295:android:0c5c9d5df24265f40fff42",
+        "android_client_info": {
+          "package_name": "com.bank.chatapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD80LRb20_FMkZkUf7EzWNSFsZ2T-fUPv0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:355545016295:android:3df7fa780064bef50fff42",
+        "android_client_info": {
+          "package_name": "com.example.chatapplication"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD80LRb20_FMkZkUf7EzWNSFsZ2T-fUPv0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
