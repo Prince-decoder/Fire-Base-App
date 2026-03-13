@@ -13,7 +13,8 @@ activityCompose = "1.9.0"
 composeBom = "2024.06.00"
 navigationCompose = "2.7.7"
 googleServicesPlugin = "4.4.2" # Note the new, camelCase alias
-firebaseBom = "33.1.1" # The version for the BoM itself
+firebaseBom = "33.1.1"
+firebaseCrashlyticsBuildtools = "3.0.6" # The version for the BoM itself
 
 [libraries]
 # Firebase - BoM and individual libraries (without versions)
@@ -45,6 +46,7 @@ androidx-compose-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-te
 # Debug
 androidx-compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
 androidx-compose-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
+firebase-crashlytics-buildtools = { group = "com.google.firebase", name = "firebase-crashlytics-buildtools", version.ref = "firebaseCrashlyticsBuildtools" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

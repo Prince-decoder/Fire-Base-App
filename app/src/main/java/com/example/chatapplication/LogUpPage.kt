@@ -1,5 +1,6 @@
 package com.example.chatapplication
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -9,31 +10,38 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 
 import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import com.example.chatapplication.User.UserViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LogUp()
+fun LogUp(navHostController: NavController,userViewModel: UserViewModel)
 {
 
     var fname by remember { mutableStateOf("") }
     var lname by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
+    val context = LocalContext.current
+    val result by userViewModel.authRESULT.observeAsState()
 
     Column(modifier = Modifier.fillMaxSize()
         .padding(8.dp), verticalArrangement = Arrangement.Center,
@@ -46,7 +54,9 @@ fun LogUp()
 
         Spacer(modifier = Modifier.height(10.dp))
 
-        Button(modifier = Modifier.fillMaxWidth(),onClick = {})
+        Button(modifier = Modifier.fillMaxWidth(),onClick = {
+            userViewModel.signUP(fname,lname,email,password)
+        })
         {
             Text(text = "Register")
         }
@@ -58,6 +68,31 @@ fun LogUp()
             {
                 Text("Login ")
             }
+        }
+        when(result)
+        {
+            is Results.Loading -> {
+                CircularProgressIndicator()
+            }
+            is Results.Success -> {
+                fname=""
+                lname=""
+                email=""
+                password=""
+                LaunchedEffect(Unit) {
+                    navHostController.navigate(Screens.LoginScreen.route)
+                    {
+                        popUpTo(Screens.LogUPScreen.route){inclusive=true}
+                    }
+                }
+            }
+            is Results.error -> {
+                LaunchedEffect(result) {
+                    Toast.makeText(
+                        context, (result as Results.error).e.message?:"Unknown error", Toast.LENGTH_LONG).show()
+                }
+            }
+            null->{}
         }
     }
 }

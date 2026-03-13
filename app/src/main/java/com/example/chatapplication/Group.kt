@@ -31,10 +31,13 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
+import com.example.chatapplication.User.UserViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Group()
+fun Group(navHostController: NavController,userViewModel: UserViewModel)
 {
     var mess by remember { mutableStateOf("") }
     Scaffold(modifier = Modifier.fillMaxSize(),

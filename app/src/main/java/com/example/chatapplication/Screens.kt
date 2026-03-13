@@ -1,4 +1,8 @@
 package com.example.chatapplication
 
-class Screens {
+sealed class Screens(val route: String) {
+    object LoginScreen: Screens("LoginPage")
+    object LogUPScreen: Screens("LogUPPage")
+    object GroupsScreen: Screens("GroupsPPage")
+    object MessageScreen: Screens("MessagePPage")
 }

@@ -69,6 +69,7 @@ dependencies {
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.compose.runtime.livedata)
+    implementation(libs.firebase.crashlytics.buildtools)
 
     // Testing
     testImplementation(libs.junit)
