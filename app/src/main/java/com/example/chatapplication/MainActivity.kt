@@ -14,9 +14,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
+import com.example.chatapplication.Room.RoomViewModel
 import com.example.chatapplication.User.AuthState
 import com.example.chatapplication.User.UserViewModel
 import com.example.chatapplication.ui.theme.ChatApplicationTheme
@@ -28,9 +31,10 @@ class MainActivity : ComponentActivity() {
         setContent {
             val navcontroller = rememberNavController()
             val userViewModel: UserViewModel= viewModel()
+            val roomViewModel: RoomViewModel = viewModel()
             ChatApplicationTheme {
                 val authState by userViewModel.authstate.collectAsState()
-                NavigationControl(navcontroller,userViewModel,authState)
+                NavigationControl(navcontroller,userViewModel,roomViewModel,authState)
             }
         }
     }
@@ -38,7 +42,7 @@ class MainActivity : ComponentActivity() {
 
 
 @Composable
-fun NavigationControl(navHostController: NavHostController,userViewModel: UserViewModel,authState: AuthState)
+fun NavigationControl(navHostController: NavHostController,userViewModel: UserViewModel,roomViewModel: RoomViewModel,authState: AuthState)
 {
 
 
@@ -69,10 +73,16 @@ fun NavigationControl(navHostController: NavHostController,userViewModel: UserVi
             LogIn(navHostController,userViewModel)
         }
         composable(Screens.GroupsScreen.route){
-            Groups(navHostController,userViewModel)
+            Groups(navHostController,userViewModel,roomViewModel)
         }
-        composable(Screens.MessageScreen.route){
-            Group(navHostController,userViewModel)
+        composable(Screens.MessageScreen.route,
+            arguments = listOf(
+                navArgument("pageid"){type = NavType.StringType},
+                navArgument("pagename"){type = NavType.StringType}
+            )){
+            val nam = it.arguments?.getString("pagename")?:""
+            val id = it.arguments?.getString("pageid")?:""
+            Group(navHostController,userViewModel,name = nam,id =id)
         }
     }
 }
