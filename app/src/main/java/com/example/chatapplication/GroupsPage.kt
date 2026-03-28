@@ -160,7 +160,7 @@ LazyColumn(modifier = Modifier.fillMaxWidth().padding(10.dp))
                     {
                         Text("Create")
                     }
-                    Button(onClick = {}, modifier = Modifier.wrapContentSize()) {
+                    Button(onClick = {showAdd=false}, modifier = Modifier.wrapContentSize()) {
                         Text("Cancel")
                     }
                 }

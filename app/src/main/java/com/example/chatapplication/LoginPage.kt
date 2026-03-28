@@ -68,7 +68,9 @@ fun LogIn(navHostController: NavController,userViewModel: UserViewModel)
             horizontalArrangement = Arrangement.Center)
         {
             Text("Don't have account ?")
-            TextButton(onClick = {}) { Text("Register")}
+            TextButton(onClick = {
+                navHostController.navigate(Screens.LogUPScreen.route)
+            }) { Text("Register")}
         }
         when(result)
         {

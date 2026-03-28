@@ -2,8 +2,8 @@
 # In gradle/libs.versions.toml
 
 [versions]
-agp = "8.13.2" # Using a more recent, stable version
-kotlin = "1.9.24"
+agp = "8.3.2" # Using a more recent, stable version
+kotlin = "2.0.0"
 coreKtx = "1.13.1"
 junit = "4.13.2"
 junitVersion = "1.2.1"
@@ -14,7 +14,10 @@ composeBom = "2024.06.00"
 navigationCompose = "2.7.7"
 googleServicesPlugin = "4.4.2" # Note the new, camelCase alias
 firebaseBom = "33.1.1"
-firebaseCrashlyticsBuildtools = "3.0.6" # The version for the BoM itself
+firebaseCrashlyticsBuildtools = "3.0.6"
+datastoreCore = "1.2.1"
+room3Runtime = "3.0.0-alpha01"
+roomKtx = "2.8.4" # The version for the BoM itself
 
 [libraries]
 # Firebase - BoM and individual libraries (without versions)
@@ -47,8 +50,12 @@ androidx-compose-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-te
 androidx-compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
 androidx-compose-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 firebase-crashlytics-buildtools = { group = "com.google.firebase", name = "firebase-crashlytics-buildtools", version.ref = "firebaseCrashlyticsBuildtools" }
+androidx-datastore-core = { group = "androidx.datastore", name = "datastore-core", version.ref = "datastoreCore" }
+androidx-room3-runtime = { group = "androidx.room3", name = "room3-runtime", version.ref = "room3Runtime" }
+androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "roomKtx" }
 
 [plugins]
-android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+android-application = { id = "com.android.application", version.ref = "agp" }
 google-gms-google-services = { id = "com.google.gms.google-services", version.ref = "googleServicesPlugin" }

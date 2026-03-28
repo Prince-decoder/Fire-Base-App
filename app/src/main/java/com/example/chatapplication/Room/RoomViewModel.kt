@@ -15,9 +15,8 @@ class RoomViewModel: ViewModel() {
 
     private val roomsRepository: RoomRepository
     init {
-        roomsRepository = RoomRepository(
-            Injection.instance())
-            listenForRoomUpdates()
+        roomsRepository = RoomRepository(Injection.instance())
+        listenForRoomUpdates()
     }
 
     fun createRoom(name :String)

@@ -1,15 +1,16 @@
 // In /home/prince/Desktop/Project/FirebaseChatApp/app/build.gradle.kts
 
-// 🔥 ADD THIS PLUGINS BLOCK AT THE TOP
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.google.gms.google.services)
+    // 1. ADD THIS LINE (The plugin you defined in libs.versions.toml)
+    alias(libs.plugins.kotlin.compose)
 }
 
 android {
     namespace = "com.example.chatapplication"
-    compileSdk = 36
+    compileSdk = 35 // Recommended: Change 36 to 35 as 36 is in preview/early stage
 
     defaultConfig {
         applicationId = "com.example.chatapplication"
@@ -43,12 +44,10 @@ android {
         compose = true
     }
 
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.14"
-    }
+    // 2. DELETE THE ENTIRE composeOptions BLOCK
+    // It is no longer needed with Kotlin 2.0.0+
 }
 
-// 🔥 ADD DEPENDENCIES BLOCK AT THE END
 dependencies {
     // Import the Firebase BoM
     implementation(platform(libs.firebase.bom))
@@ -70,6 +69,9 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.compose.runtime.livedata)
     implementation(libs.firebase.crashlytics.buildtools)
+    implementation(libs.androidx.datastore.core)
+    implementation(libs.androidx.room3.runtime)
+    implementation(libs.androidx.room.ktx)
 
     // Testing
     testImplementation(libs.junit)

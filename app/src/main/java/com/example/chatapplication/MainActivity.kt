@@ -1,9 +1,11 @@
 package com.example.chatapplication
 
+import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.CircularProgressIndicator
@@ -25,6 +27,7 @@ import com.example.chatapplication.User.UserViewModel
 import com.example.chatapplication.ui.theme.ChatApplicationTheme
 
 class MainActivity : ComponentActivity() {
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -41,6 +44,7 @@ class MainActivity : ComponentActivity() {
 }
 
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun NavigationControl(navHostController: NavHostController,userViewModel: UserViewModel,roomViewModel: RoomViewModel,authState: AuthState)
 {
@@ -82,7 +86,7 @@ fun NavigationControl(navHostController: NavHostController,userViewModel: UserVi
             )){
             val nam = it.arguments?.getString("pagename")?:""
             val id = it.arguments?.getString("pageid")?:""
-            Group(navHostController,userViewModel,name = nam,id =id)
+            Group(navHostController,name = nam,id =id)
         }
     }
 }
