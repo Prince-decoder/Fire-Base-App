@@ -63,10 +63,12 @@ class MessageViewModel : ViewModel() {
         }
 
         val message = Message(
-            senderFirstName = user.FirstName.ifEmpty {
+            senderFirstName = user.firstName.ifEmpty {
                 FirebaseAuth.getInstance().currentUser?.email?.split("@")?.first() ?: "User"
             },
-            senderId = user.Email,
+            senderId = user.email.ifEmpty {
+                FirebaseAuth.getInstance().currentUser?.email ?: ""
+            },
             text = text.trim()
         )
 
@@ -113,7 +115,7 @@ class MessageViewModel : ViewModel() {
                 val result = userrepo.getCurrentUser()
                 when (result) {
                     is Results.Success -> {
-                        Log.d("MessageViewModel", "User loaded successfully: ${result.data.FirstName}")
+                        Log.d("MessageViewModel", "User loaded successfully: ${result.data.firstName}")
                         _currentUser.value = result.data
                     }
                     is Results.error -> {
@@ -122,13 +124,13 @@ class MessageViewModel : ViewModel() {
                         val authUser = FirebaseAuth.getInstance().currentUser
                         if (authUser != null) {
                             val fallbackUser = UserDetails(
-                                FirstName = authUser.email?.split("@")?.first() ?: "User",
-                                Email = authUser.email ?: "",
-                                LastName = "",
-                                Password = ""
+                                firstName = authUser.email?.split("@")?.first() ?: "User",
+                                email = authUser.email ?: "",
+                                lastName = "",
+                                password = ""
                             )
                             _currentUser.value = fallbackUser
-                            Log.d("MessageViewModel", "Using fallback user: ${fallbackUser.FirstName}")
+                            Log.d("MessageViewModel", "Using fallback user: ${fallbackUser.firstName}")
                         }
                     }
                     else -> {}

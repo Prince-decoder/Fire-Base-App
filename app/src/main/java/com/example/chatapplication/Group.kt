@@ -75,7 +75,7 @@ fun Group(
     }
 
     LaunchedEffect(currentUser) {
-        Log.d("CHAT_DEBUG", "Current user: ${currentUser?.FirstName}")
+        Log.d("CHAT_DEBUG", "Current user: ${currentUser?.firstName}")
     }
 
     Scaffold(
@@ -153,9 +153,10 @@ fun Group(
                     .fillMaxSize()
             ) {
                 items(message) { msg ->
+                    val currentUserEmail = FirebaseAuth.getInstance().currentUser?.email
                     chatMessageItem(
                         msg,
-                        isowner = msg.senderId == currentUser?.Email
+                        isowner = msg.senderId == currentUserEmail
                     )
                 }
             }

@@ -26,7 +26,7 @@ class UserRepository(val auth : FirebaseAuth,val firestore : FirebaseFirestore
     suspend fun saveUserTOdatabase( userDetails: UserDetails): Results<Boolean>
     {
         return try {
-            firestore.collection("Customer").document(userDetails.Email)
+            firestore.collection("Customer").document(userDetails.email)
                 .set(userDetails).await()
             Results.Success(true)
         }catch (e: Exception)
